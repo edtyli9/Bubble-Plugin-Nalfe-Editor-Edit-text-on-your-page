@@ -1,0 +1,15 @@
+{
+    "categories": {
+        "0": "data (things)",
+        "1": "technical",
+        "2": "productivity",
+        "3": "small business",
+        "4": "media"
+    },
+    "description": "A visual editor that lets you edit any pages like a Word doc.\n\nFeatures\n- Edit text right on the page. You don't need to touch your Bubble editor.\n- Collaborate with your team without giving them full access to your Bubble editor.",
+    "image": "//s3.amazonaws.com/appforest_uf/f1648000231500x592192116753957200/nalfe_logo_square.png",
+    "license": "open_source",
+    "link": "https://www.nalfe.com",
+    "name": "Nalfe Editor-Edit text on your page",
+    "plugin_instructions": "1. Click on the \"Edit page\" button on the bottom right corner of your app (index page).\n2. Register for an account on Nalfe.\n3. Click on your app on the Nalfe dashboard and start editing!"
+}

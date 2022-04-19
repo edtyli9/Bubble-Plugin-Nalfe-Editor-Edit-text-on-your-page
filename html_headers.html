@@ -1,0 +1,58 @@
+<style>
+    n[contenteditable="true"] {
+        border-bottom: 2px solid #FF7610;
+        padding: 3px 3px 3px 3px;
+        pointer-events: none !important;
+    }
+
+    .nalfe-contenteditable[contenteditable="true"] {
+        border-bottom: 2px solid #FF7610;
+        padding: 3px 3px 3px 3px;
+        cursor: text !important;
+    }
+
+    #nalfe_editor_iframe {
+        background: transparent;
+        height: calc(100% - 48px);
+        width: 360px;
+        position: fixed;
+        top: 48px;
+        right: 0px;
+        z-index: 9000000000000000000;
+        border-left: 1px solid #D9DFE3;
+    }
+
+    #nalfe_top_menu {
+        background: transparent;
+        height: 48px;
+        width: 100%;
+        position: fixed;
+        top: 0px;
+        right: 0px;
+        z-index: 9000000000000000000;
+        overflow: hidden;
+        border-bottom: 1px solid #D9DFE3;
+    }
+
+    .NalfeEditBtn {
+        pointer-events: auto;
+        position: absolute;
+        top: 0;
+        right: 0;
+        background-color: transparent;
+        border: none;
+        width: 32px;
+        height: 32px;
+    }
+
+    .nalfe-icon-pen {
+        color: #FF7610;
+        pointer-events: none !important;
+        width: 100%;
+        height: 100%;
+    }
+
+</style>
+<script>
+{window.nalfe_nocode_changes=[],window.nalfe_nocode_data=[],window.nalfe_nocode_get=function(e){return window.nalfe_nocode_data.find(t=>t.id===e)};let e,t,n,i,a="_*_Test_*_",o=!1,l="https://www.nalfe.com/plugin-editor-side-bar",s="https://www.nalfe.com/plugin-editor-header",d="https://www.nalfe.com/api/1.1/wf/e_get_changes",r=!1,c='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" style="width:100%;height:100%;">\x3c!--! Font Awesome Pro 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --\x3e<path fill="#FF7610" d="M362.7 19.32C387.7-5.678 428.3-5.678 453.3 19.32L492.7 58.75C517.7 83.74 517.7 124.3 492.7 149.3L444.3 197.7L314.3 67.72L362.7 19.32zM421.7 220.3L188.5 453.4C178.1 463.8 165.2 471.5 151.1 475.6L30.77 511C22.35 513.5 13.24 511.2 7.03 504.1C.8198 498.8-1.502 489.7 .976 481.2L36.37 360.9C40.53 346.8 48.16 333.9 58.57 323.5L291.7 90.34L421.7 220.3z"/></svg>',u={};var observeDOM=function(){var e=window.MutationObserver||window.WebKitMutationObserver;return function(t,n){if(t&&1===t.nodeType){if(e){var i=new e(n);return i.observe(t,{childList:!0,subtree:!0}),i}window.addEventListener&&(t.addEventListener("DOMNodeInserted",n,!1),t.addEventListener("DOMNodeRemoved",n,!1))}}}();let f=function(n){n.url=u.url,n.test=u.test,n.app_name=u.app_name,n.full_url=u.full_url,n.pathname=u.pathname,e.contentWindow.postMessage(n,l),t.contentWindow.postMessage(n,s),console.log(n)},p=function(e){if(""!==e.id)return"//*[@id='"+e.id+"']";if(e===document.body)return e.tagName.toLowerCase();let t=0,n=e.parentNode.childNodes;for(var i=0;i<n.length;i++){let a=n[i];if(a===e)return p(e.parentNode)+"/"+e.tagName.toLowerCase()+"["+(t+1)+"]";1===a.nodeType&&a.tagName===e.tagName&&t++}},m=function(e){return(new XPathEvaluator).evaluate(e,document.documentElement,null,XPathResult.FIRST_ORDERED_NODE_TYPE,null).singleNodeValue},h=function(e){if(i){let t=[],a=e.children;if(a)for(let e=0;e<a.length;e++)a[e].classList.contains("NalfeElement")&&t.push(a[e]),a[e].classList.contains("NalfeEditBtn")&&t.push(a[e]);if(t.includes(i))return;if(e===i)return;i.contentEditable=!1,i.classList.remove("nalfe-contenteditable"),i.onclick=n,i.style.pointerEvents="unset",n=null,i=null}},g=async function(){let e=new URL(window.location.href).searchParams.get("nalfe");"test"===e&&(a=e),a&&(d="https://www.nalfe.com/version-test/api/1.1/wf/e_get_changes");let t=new FormData;t.append("pathname",window.location.pathname),t.append("domain",`https://${window.location.hostname}/`);const n=await fetch(d,{method:"POST",body:t});let i=await n.json();if(!i.response.changes)return!1;for(let e=0;e<i.response.changes.length;e++){let t=JSON.parse(i.response.changes[e]);window.nalfe_nocode_changes.push(t)}return w(),!0},w=async function(){for(let e=0;e<window.nalfe_nocode_changes.length;e++){let t=window.nalfe_nocode_changes[e],n=m(t.xpath);n?"static_text"===t.type&&t.innerText!==n.innerText&&(n.innerText=t.innerText):console.log(`[Nalfe] Failed to get element from ${t.xpath}`)}return!0},_=function(){let e=new URL(document.querySelector('link[type="text/css"]').href).pathname.split("/")[4],t=!1,n=window.location,i=n.pathname;i.includes("/version-test")&&(t=!0);let a={url:"https://"+n.hostname+"/",test:t,app_name:e,full_url:n.href,pathname:i};u=a},y=async function(){let e=function(e){let t=document.createElement("button");t.classList.add("NalfeEditBtn");let a=document.createElement("i");a.classList.add("fa-solid","fa-pen","nalfe-icon-pen"),a.innerHTML=c,t.appendChild(a),t.contentEditable=!1,t.style.visibility="hidden",t.onclick=function(){event.stopPropagation();let e=event.target.parentElement;h(e),i=e,n=e.onclick,e.onclick=null,e.contentEditable=!0,e.classList.add("nalfe-contenteditable"),e.focus(),t.style.visibility="hidden";let a={};a.xpath=p(e),a.innerText=e.innerText,a.type="static_text",f(a)},e.addEventListener("input",function(e){let t=e.target,n={};n.xpath=p(t),n.innerText=t.innerText,n.type="static_text",f(n)},!1),e.appendChild(t),e.addEventListener("mouseleave",function(e){t.style.visibility="hidden"}),e.addEventListener("mouseover",function(e){e.target.classList.contains("nalfe-contenteditable")||(t.style.visibility="visible")})},t=document.getElementsByTagName("*");for(let n=0;n<t.length;n++){if(["script","style","title","n"].includes(t[n].tagName.toLowerCase()))continue;if(t[n].classList.contains("NalfeEditBtn"))continue;let i=t[n].firstChild,a=!1;for(;i;){if(1==i.nodeType){if(i.classList.contains("NalfeEditBtn")){a=!1;break}}else if(3==i.nodeType&&/\S/.test(i.textContent)){if("Built on Bubble"===i.textContent){i=i.nextSibling;continue}a=!0}i=i.nextSibling}a&&e(t[n])}},v=function(){let o=function(e){var t,n;if(4===this.readyState){if(t=e.target.responseText,Object.defineProperty(this,"responseText",{writable:!0}),n=JSON.parse(t),this.url.includes("msearch"))for(let e=0;e<n.responses.length;e++)for(let t=0;t<n.responses[e].hits.hits.length;t++){let i=n.responses[e].hits.hits[t],a=i._source;for(const e in a)if(e.endsWith("_text")){let t={};t.uid=i._id,t.type_name=i._type,t.field_name=e,t.value=a[e],t.id=window.nalfe_nocode_data.push(t)-1,a[e]=`<n>${t.id}</n>${a[e]}`}}else if(this.url.includes("mget"))for(let e=0;e<n.docs.length;e++){let t=n.docs[e],i=n.docs[e]._source;for(const e in i)if(e.endsWith("_text")){let n={};n.uid=t._id,n.type_name=t._type,n.field_name=e,n.value=i[e],n.id=window.nalfe_nocode_data.push(n)-1,i[e]=`<n>${n.id}</n>${i[e]}`}}this.responseText=JSON.stringify(n)}};a?console.log("Nalfe Editor is running in test mode."):console.log("Nalfe Editor is running"),window.addEventListener("click",function(e){h(e.target)});var d=XMLHttpRequest.prototype,r=d.send,p=d.open;d.open=function(e,t){return this.url=t,this.url.includes("elasticsearch")&&this.addEventListener("readystatechange",o),p.apply(this,arguments)},d.send=function(){return this.addEventListener("load",function(){}),r.apply(this,arguments)},setInterval(async function(){let e=document.getElementsByClassName("bubble-element");for(let t=0;t<e.length;t++){if(!e[t].classList.contains("Text")&&!e[t].classList.contains("Button"))continue;if(!e[t].innerText.includes("<n>")&&!e[t].innerText.includes("<N>"))continue;const a=/<[nN]>([0-9]+)<\/[nN]>/gm.exec(e[t].innerText);let o=window.nalfe_nocode_get(parseInt(a[1])),l=o.value,s=document.createElement("button");s.classList.add("NalfeEditBtn"),s.dataset.nalfe=a[1];let d=document.querySelectorAll(`.NalfeEditBtn[data-nalfe="${a[1]}"]`).length,r=`nalfe-edit-btn-${a[1]}-${d}`,u=document.querySelectorAll(`n[data-nalfe="${a[1]}"]`).length,p=`nalfe-text-element-${a[1]}-${u}`;s.id=r;let m,g=document.createElement("i");if(g.classList.add("fa-solid","fa-pen","nalfe-icon-pen"),g.innerHTML=c,s.appendChild(g),s.style.visibility="hidden",s.contentEditable=!1,s.onmouseover=function(){},e[t].innerHTML.includes(`&lt;n&gt;${a[1]}&lt;/n&gt;${l}`))e[t].innerHTML=e[t].innerHTML.replace(`&lt;n&gt;${a[1]}&lt;/n&gt;${l}`,`<n id="${p}" class="NalfeElement" data-nalfe="${a[1]}">${l}</n>`),m=e[t].appendChild(s);else{const n=new RegExp(`&lt;n&gt;${a[1]}&lt;\\/n&gt;([\\s\\S]*)\\.\\.\\.`,"gm").exec(e[t].innerHTML);if(n)e[t].innerHTML=e[t].innerHTML.replace(n[0],`<n id="${p}" class="NalfeElement"  data-nalfe="${a[1]}">${n[1]}...</n>`),m=e[t].appendChild(s);else{let n=document.createElement("n");n.classList.add("NalfeElement","nalfe-not-editable"),n.dataset.nalfe=a[1],n.id=p;let i=new RegExp(`&lt;[nN]&gt;${a[1]}&lt;\\/[nN]&gt;`,"gm").exec(e[t].innerHTML);e[t].innerHTML=e[t].innerHTML.replace(i[0],""),e[t].appendChild(n),m=e[t].appendChild(s)}}let w=document.getElementById(p),_=function(){event.stopPropagation();let e=document.getElementById(p);h(e),i=e,n=e.onclick,e.classList.contains("nalfe-not-editable")||(e.contentEditable=!0,e.onclick=null,e.style.pointerEvents="none",e.classList.add("nalfe-contenteditable"),e.focus()),m.style.visibility="hidden";let t={type:"database_bubble"};t.uid=o.uid,t.type_name=o.type_name,t.field_name=o.field_name,t.new_value=e.innerText,f(t)};m.onclick=_,e[t].addEventListener("mouseleave",function(e){document.getElementById(r).style.visibility="hidden"}),e[t].addEventListener("mouseover",function(e){if(e.target.classList.contains("nalfe-contenteditable"))return;if(e.target.getElementsByClassName("nalfe-contenteditable")[0])return;let t=document.getElementById(r);t.onclick=_,t.style.visibility="visible"});let y=function(e){event.stopPropagation();let t={type:"database_bubble"};t.uid=o.uid,t.type_name=o.type_name,t.field_name=o.field_name,t.new_value=e.target.innerText,f(t)};w.addEventListener("input",y,!1)}return!0},100),_(),function(){let n=document.createElement("style");n.innerHTML="html{margin-top: 48px !important;margin-right: 360px !important;}.FloatingGroup,.CustomElement.floating-group { margin-top: 48px !important; margin-right: 360px !important;}",document.head.appendChild(n),(e=document.createElement("iframe")).frameBorder="none",e.src=l,e.id="nalfe_editor_iframe",e.onload=function(){setTimeout(function(){f(u)},1e3)},document.body.appendChild(e),(t=document.createElement("iframe")).frameBorder="none",t.scrolling="no",t.src=s,t.id="nalfe_top_menu",t.onload=function(){window.addEventListener("message",e=>{"Show"===e.data.action?t.style.height="100%":"Hide"===e.data.action?t.style.height="48px":"go_to_page"===e.data.action&&(window.location=e.data.go_to_page)}),setTimeout(function(){f(u)},1e3)},document.body.appendChild(t)}()};document.addEventListener("DOMContentLoaded",function(e){let t=new URL(window.location.href),n=t.searchParams.get("nalfe");n?(o=!0,sessionStorage.setItem("nalfe_editor",n)):sessionStorage.nalfe_editor&&(t.searchParams.append("nalfe",sessionStorage.nalfe_editor),window.history.pushState({},"",t),"test"===sessionStorage.nalfe_editor&&(a=sessionStorage.nalfe_editor),o=!0),o&&("test"===n&&(a=n),a&&(l="https://www.nalfe.com/version-test/plugin-editor-side-bar",s="https://www.nalfe.com/version-test/plugin-editor-header"),v()),observeDOM(document.body,function(){r=!0}),setInterval(async function(){r&&(await w(),o&&await y(),r=!1)},100)}),g()}
+</script>
